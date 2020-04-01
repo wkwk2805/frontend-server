@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Button } from "@material-ui/core";
 import Link from "next/link";
-import CusTextField from "../components/CusTextField";
-import CusAnchor from "../components/CusAnchor";
+import CusTextField from "../components/auth/CusTextField";
+import CusAnchor from "../components/common/CusAnchor";
 
 const Login = () => {
   return (

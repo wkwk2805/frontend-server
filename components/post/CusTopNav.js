@@ -6,7 +6,14 @@ const CusTopNav = () => {
   return (
     <div>
       <AppBar position="fixed">
-        <Toolbar style={{ width: "100%" }}>
+        <Toolbar
+          variant="dense"
+          style={{
+            width: "100%",
+            minHeight: 20,
+            backgroundColor: "#0f4c81"
+          }}
+        >
           <Typography style={{ width: "50%" }}>Logo Space</Typography>
           <div style={{ width: "40%", textAlign: "right" }}>
             <IconButton edge="end" color="inherit">

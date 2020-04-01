@@ -1,164 +1,59 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Avatar,
-  IconButton,
-  Typography,
-  InputBase,
-  Button
-} from "@material-ui/core";
-import {
-  FavoriteBorder,
-  Share,
-  ChatBubbleOutline,
-  ArrowDropDown,
-  Add
-} from "@material-ui/icons";
-import { red } from "@material-ui/core/colors";
-import MenuIcon from "../components/MenuIcon";
-import CusComment from "../components/CusComment";
+import CusTopNav from "../components/post/CusTopNav";
+import Content from "./Content";
+import CusGroup from "../components/post/CusGroup";
+import { Paper, IconButton } from "@material-ui/core";
+import Head from "next/head";
+import { CropFree } from "@material-ui/icons";
 
 const Post = () => {
   return (
-    <Card style={{ marginTop: 5 }}>
-      <div>
-        <CardHeader
-          style={{
-            paddingBottom: 5,
-            width: "40%",
-            float: "left",
-            paddingRight: 0
-          }}
-          avatar={
-            <Avatar
-              aria-label="recipe"
-              style={{
-                backgroundColor: red[500],
-                width: 25,
-                height: 25
-              }}
-            >
-              R
-            </Avatar>
-          }
-          title="아이디(이름)"
+    <>
+      <Head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          charSet="UTF-8"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
         />
-        <Button
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        />
+      </Head>
+      <CusTopNav />
+      <div style={{ marginTop: 60 }}></div>
+      {/* groups */}
+      <Paper variant="outlined" style={{ overflow: "auto" }}>
+        <IconButton
           style={{
-            display: "inline-block",
-            marginTop: 13,
-            marginLeft: 3,
-            paddingLeft: 0,
-            fontSize: 13,
-            color: "#1976d2"
+            padding: 0,
+            margin: 0,
+            position: "absolute",
+            right: 10,
+            zIndex: 1
           }}
         >
-          친구추가
-        </Button>
-        <div
-          style={{
-            display: "inline-block",
-            margin: 12,
-            padding: 4,
-            fontSize: 15,
-            float: "right",
-            backgroundColor: "#d5d5d5",
-            borderRadius: 15,
-            color: "white"
-          }}
-        >
-          1/10
-        </div>
-      </div>
-      <CardMedia
-        style={{
-          height: 0,
-          paddingTop: "70%" // 16:9,
-        }}
-        image="/images/sample.jpg"
-        title="Sample"
-      />
+          <CropFree style={{ fontSize: 18, fontWeight: 600 }} />
+        </IconButton>
+        <CusGroup name="그룹1" image="sample.jpg" active />
+        <CusGroup name="그룹2" image="sample.jpg" />
+        <CusGroup name="그룹3" image="sample.jpg" />
+        <CusGroup name="그룹4" image="sample.jpg" />
+        <CusGroup name="그룹4" image="sample.jpg" />
+        <CusGroup name="그룹4" image="sample.jpg" />
+        <CusGroup name="그룹4" image="sample.jpg" />
+      </Paper>
+      {/* posts */}
       <div>
-        <CardActions
-          disableSpacing
-          style={{ padding: 0, width: "70%", display: "inline-block" }}
-        >
-          <IconButton aria-label="like">
-            <FavoriteBorder />
-            <Typography variant="subtitle2" style={{ marginLeft: 4 }}>
-              30
-            </Typography>
-          </IconButton>
-          <IconButton aria-label="comment">
-            <ChatBubbleOutline />
-            <Typography variant="subtitle2" style={{ marginLeft: 4 }}>
-              30
-            </Typography>
-          </IconButton>
-          <IconButton aria-label="share">
-            <Share />
-            <Typography variant="subtitle2" style={{ marginLeft: 4 }}>
-              30
-            </Typography>
-          </IconButton>
-        </CardActions>
-        <MenuIcon />
+        <Content />
+        <Content />
+        <Content />
+        <Content />
       </div>
-      <CardContent style={{ paddingTop: 0, paddingBottom: 10 }}>
-        <Typography variant="body2" color="textSecondary" component="p">
-          이곳은 이 사진에 대한 글 등을 쓰는 공간입니다. 적당히 길이가 길어지면
-          ...
-          <ArrowDropDown style={{ verticalAlign: "middle" }} />
-        </Typography>
-        <div style={{ marginTop: 10 }}>
-          <CusComment user="아이디(이름)" comment="댓글내용입니다..." />
-        </div>
-        <Typography variant="body2" color="textSecondary" component="p">
-          댓글10개
-          <IconButton style={{ padding: 0 }}>
-            <ArrowDropDown />
-          </IconButton>
-        </Typography>
-
-        <div style={{ marginTop: 5 }}>
-          <Avatar
-            aria-label="user"
-            style={{
-              backgroundColor: red[500],
-              width: 20,
-              height: 20,
-              float: "left",
-              marginRight: 5
-            }}
-          />
-          <span style={{ verticalAlign: "super" }}>
-            <InputBase
-              placeholder="댓글을 입력하세요"
-              style={{
-                fontSize: 12,
-                padding: 2,
-                verticalAlign: "bottom",
-                width: "80%"
-              }}
-            />
-            <IconButton
-              style={{
-                verticalAlign: "baseline",
-                padding: 0,
-                display: "inline-block",
-                float: "right"
-              }}
-            >
-              <Add />
-            </IconButton>
-          </span>
-        </div>
-      </CardContent>
-    </Card>
+    </>
   );
 };
+
 export default Post;
