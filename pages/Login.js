@@ -13,7 +13,7 @@ const Login = () => {
       <CusTextField label="아이디" />
       <CusTextField label="비밀번호" type="password" />
       <div style={{ textAlign: "center", margin: 10 }}>
-        <Link href="/Navigation">
+        <Link href="/Nav">
           <Button variant="contained" color="primary">
             로그인
           </Button>
