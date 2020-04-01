@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   BottomNavigation,
   BottomNavigationAction,
@@ -7,6 +7,7 @@ import {
 import { Home, Search, Feedback, PostAdd, Person } from "@material-ui/icons";
 
 const CusBottomNav = () => {
+  const stylesIcon = { minWidth: 0, paddingBottom: 0, paddingTop: 0 };
   const [value, setValue] = React.useState(0);
   return (
     <Paper
@@ -14,8 +15,7 @@ const CusBottomNav = () => {
         bottom: 0,
         left: 0,
         position: "fixed",
-        width: "100%",
-        paddingBottom: 2
+        width: "100%"
       }}
       elevation={8}
     >
@@ -24,26 +24,29 @@ const CusBottomNav = () => {
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
+        style={{
+          height: 40
+        }}
       >
         <BottomNavigationAction
-          icon={<Home fontSize="large" />}
-          style={{ minWidth: 0 }}
+          icon={<Home style={{ fontSize: 30 }} />}
+          style={stylesIcon}
         />
         <BottomNavigationAction
-          icon={<Search fontSize="large" />}
-          style={{ minWidth: 0 }}
+          icon={<Search style={{ fontSize: 30 }} />}
+          style={stylesIcon}
         />
         <BottomNavigationAction
-          icon={<PostAdd fontSize="large" />}
-          style={{ minWidth: 0 }}
+          icon={<PostAdd style={{ fontSize: 30 }} />}
+          style={stylesIcon}
         />
         <BottomNavigationAction
-          icon={<Feedback fontSize="large" />}
-          style={{ minWidth: 0 }}
+          icon={<Feedback style={{ fontSize: 30 }} />}
+          style={stylesIcon}
         />
         <BottomNavigationAction
-          icon={<Person fontSize="large" />}
-          style={{ minWidth: 0 }}
+          icon={<Person style={{ fontSize: 30 }} />}
+          style={stylesIcon}
         />
       </BottomNavigation>
     </Paper>
