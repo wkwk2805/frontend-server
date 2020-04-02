@@ -4,7 +4,7 @@ import { PersonAdd, Group } from "@material-ui/icons";
 
 const CusTopNav = () => {
   return (
-    <div>
+    <>
       <AppBar position="fixed">
         <Toolbar
           variant="dense"
@@ -25,7 +25,8 @@ const CusTopNav = () => {
           </div>
         </Toolbar>
       </AppBar>
-    </div>
+      <div style={{ marginTop: 60 }}></div>
+    </>
   );
 };
 

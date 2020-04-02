@@ -1,0 +1,11 @@
+.placeholder-style input {
+  color: white !important;
+}
+
+.placeholder-style input::placeholder {
+  color: white !important;
+}
+
+.placeholder-style input::-webkit-input-placeholder {
+  color: white !important;
+}

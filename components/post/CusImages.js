@@ -16,7 +16,7 @@ const CusImages = () => {
     >
       <div>
         <CardMedia
-          image="/images/sample.jpg"
+          image="/images/sample2.jpg"
           title="Sample"
           style={{
             height: 0,
@@ -30,7 +30,7 @@ const CusImages = () => {
             height: 0,
             paddingTop: "70%" // 16:9,
           }}
-          image="/images/sample.jpg"
+          image="/images/sample2.jpg"
           title="Sample"
         />
       </div>
@@ -40,7 +40,7 @@ const CusImages = () => {
             height: 0,
             paddingTop: "70%" // 16:9,
           }}
-          image="/images/sample.jpg"
+          image="/images/sample2.jpg"
           title="Sample"
         />
       </div>

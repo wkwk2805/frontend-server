@@ -5,7 +5,6 @@ const CusTextField = ({ label, type, isErr }) => {
   return (
     <TextField
       label={label}
-      variant="outlined"
       size="small"
       fullWidth
       style={{ marginTop: 10 }}

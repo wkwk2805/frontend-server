@@ -1,28 +1,28 @@
 import React from "react";
-import { Avatar, Typography, IconButton } from "@material-ui/core";
+import { Avatar, Typography, IconButton, Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import { FavoriteBorder } from "@material-ui/icons";
 
-const CusComment = ({ user, comment, image }) => {
+const CommentBig = ({ user, comment, image }) => {
   return (
-    <>
+    <div style={{ margin: 5 }}>
       <Avatar
         aria-label="user"
         style={{
           backgroundColor: red[500],
-          width: 20,
-          height: 20,
+          width: 35,
+          height: 35,
           float: "left",
           marginRight: 5
         }}
         src={image}
       />
-      <span style={{ verticalAlign: "super" }}>
-        <Typography variant="caption" color="textSecondary" component="span">
+      <span style={{ verticalAlign: "text-bottom" }}>
+        <Typography variant="subtitle2" component="span">
           {user}
         </Typography>
         {`  `}
-        <Typography variant="caption" color="textSecondary" component="span">
+        <Typography variant="caption" component="span">
           {comment}
         </Typography>
       </span>
@@ -36,8 +36,18 @@ const CusComment = ({ user, comment, image }) => {
           <FavoriteBorder fontSize="small" />
         </IconButton>
       </div>
-    </>
+      <Button
+        style={{
+          display: "block",
+          fontSize: 11,
+          padding: 0,
+          textAlign: "left"
+        }}
+      >
+        답글달기
+      </Button>
+    </div>
   );
 };
 
-export default CusComment;
+export default CommentBig;
