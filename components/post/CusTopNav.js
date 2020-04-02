@@ -1,8 +1,19 @@
-import React from "react";
-import { AppBar, Typography, Toolbar, IconButton } from "@material-ui/core";
-import { PersonAdd, Group } from "@material-ui/icons";
+import React, { useState } from "react";
+import {
+  AppBar,
+  Typography,
+  Toolbar,
+  IconButton,
+  Paper
+} from "@material-ui/core";
+import { PersonAdd, Group, CropFree } from "@material-ui/icons";
+import CusGroup from "./CusGroup";
 
-const CusTopNav = ({ groupToggle }) => {
+const CusTopNav = () => {
+  const [groupView, setGroupView] = useState(false);
+  const groupToggle = () => {
+    setGroupView(!groupView);
+  };
   return (
     <>
       <AppBar position="fixed">
@@ -24,8 +35,32 @@ const CusTopNav = ({ groupToggle }) => {
             </IconButton>
           </div>
         </Toolbar>
+        {groupView && (
+          <Paper variant="outlined" style={{ overflow: "auto" }} square>
+            <IconButton
+              style={{
+                padding: 0,
+                margin: 0,
+                position: "absolute",
+                right: 10,
+                zIndex: 1
+              }}
+            >
+              <CropFree
+                style={{ fontSize: 20, fontWeight: 600, color: "black" }}
+              />
+            </IconButton>
+            <CusGroup name="그룹1" image="sample.jpg" active />
+            <CusGroup name="그룹2" image="sample.jpg" />
+            <CusGroup name="그룹3" image="sample.jpg" />
+            <CusGroup name="그룹4" image="sample.jpg" />
+            <CusGroup name="그룹4" image="sample.jpg" />
+            <CusGroup name="그룹4" image="sample.jpg" />
+            <CusGroup name="그룹4" image="sample.jpg" />
+          </Paper>
+        )}
       </AppBar>
-      <div style={{ marginTop: 60 }}></div>
+      <div style={{ marginTop: 60 + (groupView && 70) }}></div>
     </>
   );
 };

@@ -7,6 +7,7 @@ const CusGroup = ({ name, image, active }) => {
     <span
       style={{
         padding: 10,
+        paddingBottom: 5,
         width: 50,
         textAlign: "center",
         display: "table-cell"
@@ -18,8 +19,8 @@ const CusGroup = ({ name, image, active }) => {
         style={{
           border: `1.8px solid ${active ? red[300] : "grey"}`,
           alignSelf: "center",
-          width: 50,
-          height: 50
+          width: 40,
+          height: 40
         }}
       />
       <div style={{ fontSize: 11, display: "block" }}>{name}</div>
