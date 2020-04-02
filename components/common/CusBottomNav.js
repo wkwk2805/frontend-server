@@ -5,10 +5,17 @@ import {
   Paper
 } from "@material-ui/core";
 import { Home, Search, Feedback, PostAdd, Person } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+import { showLoading } from "../../modules/loading";
 
 const CusBottomNav = ({ changeView }) => {
+  const dispatch = useDispatch();
   const stylesIcon = { minWidth: 0, paddingBottom: 0, paddingTop: 0 };
   const [value, setValue] = React.useState(0);
+  const selectView = branch => {
+    dispatch(showLoading());
+    changeView(branch);
+  };
   return (
     <>
       <div style={{ marginBottom: 45 }}></div>
@@ -33,27 +40,27 @@ const CusBottomNav = ({ changeView }) => {
           <BottomNavigationAction
             icon={<Home style={{ fontSize: 30 }} />}
             style={stylesIcon}
-            onClick={() => changeView("Home")}
+            onClick={() => selectView("Home")}
           />
           <BottomNavigationAction
             icon={<Search style={{ fontSize: 30 }} />}
             style={stylesIcon}
-            onClick={() => changeView("Search")}
+            onClick={() => selectView("Search")}
           />
           <BottomNavigationAction
             icon={<PostAdd style={{ fontSize: 30 }} />}
             style={stylesIcon}
-            onClick={() => changeView("Add")}
+            onClick={() => selectView("Add")}
           />
           <BottomNavigationAction
             icon={<Feedback style={{ fontSize: 30 }} />}
             style={stylesIcon}
-            onClick={() => changeView("Notice")}
+            onClick={() => selectView("Notice")}
           />
           <BottomNavigationAction
             icon={<Person style={{ fontSize: 30 }} />}
             style={stylesIcon}
-            onClick={() => changeView("Profile")}
+            onClick={() => selectView("Profile")}
           />
         </BottomNavigation>
       </Paper>

@@ -2,7 +2,7 @@ import React from "react";
 import { AppBar, Typography, Toolbar, IconButton } from "@material-ui/core";
 import { PersonAdd, Group } from "@material-ui/icons";
 
-const CusTopNav = () => {
+const CusTopNav = ({ groupToggle }) => {
   return (
     <>
       <AppBar position="fixed">
@@ -16,7 +16,7 @@ const CusTopNav = () => {
         >
           <Typography style={{ width: "50%" }}>Logo Space</Typography>
           <div style={{ width: "40%", textAlign: "right" }}>
-            <IconButton edge="end" color="inherit">
+            <IconButton edge="end" color="inherit" onClick={groupToggle}>
               <Group />
             </IconButton>
             <IconButton edge="end" color="inherit">

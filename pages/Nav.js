@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import Post from "./Post";
 import CusBottomNav from "../components/common/CusBottomNav";
 import Explore from "./Explore";
-import Head from "next/head";
 import Notice from "./Notice";
-import Comments from "./Comments";
+
 import Profile from "./Profile";
+import { useDispatch } from "react-redux";
+import { hideLoading } from "../modules/loading";
 
 const Nav = () => {
+  const dispatch = useDispatch();
   const [win, setWin] = useState({});
   const [view, setView] = useState(<Post />);
   const setWindow = () => {
@@ -16,7 +18,7 @@ const Nav = () => {
       hei: window.innerHeight
     });
   };
-  const changeView = viewName => {
+  const changeView = async viewName => {
     let resultView = "";
     switch (viewName) {
       case "Home":
@@ -38,10 +40,12 @@ const Nav = () => {
         resultView = <Post win={win} />;
         break;
     }
-    setView(resultView);
+    await setView(resultView);
+    dispatch(hideLoading());
   };
   useEffect(() => {
     setWindow();
+    dispatch(hideLoading());
   }, []);
   useEffect(() => {
     window.addEventListener("resize", setWindow);

@@ -21,8 +21,18 @@ import { red } from "@material-ui/core/colors";
 import MenuIcon from "../components/post/MenuIcon";
 import CusComment from "../components/post/CusComment";
 import CusImages from "../components/post/CusImages";
+import { useRouter } from "next/router";
+
+import { useDispatch } from "react-redux";
+import { showLoading } from "../modules/loading";
 
 const Content = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const moveComment = async () => {
+    dispatch(showLoading());
+    router.push("/Comments");
+  };
   return (
     <Card style={{ marginTop: 5 }}>
       <div>
@@ -126,7 +136,7 @@ const Content = () => {
         </div>
         <Typography variant="overline" color="textSecondary" component="p">
           댓글10개
-          <IconButton style={{ padding: 0 }}>
+          <IconButton style={{ padding: 0 }} onClick={moveComment}>
             <ArrowDropDown />
           </IconButton>
         </Typography>

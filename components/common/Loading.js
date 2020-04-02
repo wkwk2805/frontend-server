@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const Loading = ({ isShow }) => {
-  const [open, setOpen] = React.useState(false);
-  useEffect(() => {
-    setOpen(isShow);
-  }, [isShow]);
+const Loading = () => {
+  const open = useSelector(state => state.loading);
   return (
     <div>
       <Backdrop
