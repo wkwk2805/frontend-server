@@ -67,7 +67,7 @@ const Profile = ({ win }) => {
       </div>
       <div>
         <Typography variant="button">게시물 15</Typography>
-        <ExploreBody tileData={tileData} cellHeight={win.wid / 3} />
+        <ExploreBody tileData={tileData} />
       </div>
     </div>
   );

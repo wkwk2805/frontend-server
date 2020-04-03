@@ -5,7 +5,10 @@ const CusTop = ({ text }) => {
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar style={{ backgroundColor: "#1976d2" }} variant="dense">
+        <Toolbar
+          style={{ backgroundColor: "rgb(15, 76, 129)" }}
+          variant="dense"
+        >
           <Typography component="div">{text}</Typography>
         </Toolbar>
       </AppBar>

@@ -8,11 +8,19 @@ import {
 } from "@material-ui/core";
 import { PersonAdd, Group, CropFree } from "@material-ui/icons";
 import CusGroup from "./CusGroup";
+import { useRouter } from "next/router";
 
 const CusTopNav = () => {
+  const router = useRouter();
   const [groupView, setGroupView] = useState(false);
   const groupToggle = () => {
     setGroupView(!groupView);
+  };
+  const moveFriendList = () => {
+    router.push("/FriendList");
+  };
+  const moveGroupList = () => {
+    router.push("/GroupList");
   };
   return (
     <>
@@ -30,7 +38,7 @@ const CusTopNav = () => {
             <IconButton edge="end" color="inherit" onClick={groupToggle}>
               <Group />
             </IconButton>
-            <IconButton edge="end" color="inherit">
+            <IconButton edge="end" color="inherit" onClick={moveFriendList}>
               <PersonAdd />
             </IconButton>
           </div>
@@ -39,15 +47,16 @@ const CusTopNav = () => {
           <Paper variant="outlined" style={{ overflow: "auto" }} square>
             <IconButton
               style={{
-                padding: 0,
-                margin: 0,
+                padding: 5,
+                margin: -5,
                 position: "absolute",
-                right: 10,
+                right: 0,
                 zIndex: 1
               }}
             >
               <CropFree
                 style={{ fontSize: 20, fontWeight: 600, color: "black" }}
+                onClick={moveGroupList}
               />
             </IconButton>
             <CusGroup name="그룹1" image="sample.jpg" active />

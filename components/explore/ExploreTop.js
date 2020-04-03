@@ -6,7 +6,10 @@ const ExploreTop = () => {
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar style={{ backgroundColor: "#1976d2" }} variant="dense">
+        <Toolbar
+          style={{ backgroundColor: "rgb(15, 76, 129)" }}
+          variant="dense"
+        >
           <InputBase
             className="placeholder-style"
             placeholder="검색"

@@ -41,7 +41,8 @@ const CommentBig = ({ user, comment, image }) => {
           display: "block",
           fontSize: 11,
           padding: 0,
-          textAlign: "left"
+          textAlign: "left",
+          minWidth: 0
         }}
       >
         답글달기

@@ -45,11 +45,11 @@ const tileData = [
   }
 ];
 
-const Explore = ({ win }) => {
+const Explore = () => {
   return (
     <>
       <ExploreTop />
-      <ExploreBody tileData={tileData} cellHeight={win.wid / 3} />
+      <ExploreBody tileData={tileData} />
     </>
   );
 };

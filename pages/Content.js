@@ -69,7 +69,7 @@ const Content = () => {
             marginLeft: 3,
             padding: 0,
             fontSize: 11,
-            color: "#1976d2"
+            color: "rgb(15, 76, 129)"
           }}
         >
           친구추가

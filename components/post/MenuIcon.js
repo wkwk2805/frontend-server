@@ -6,8 +6,6 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const options = ["글수정", "글삭제"];
 
-const ITEM_HEIGHT = 48;
-
 const MenuIcon = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

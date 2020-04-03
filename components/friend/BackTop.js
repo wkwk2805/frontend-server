@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
-import { Typography, AppBar, Toolbar, IconButton } from "@material-ui/core";
-import { KeyboardBackspace, Edit, Delete } from "@material-ui/icons";
+import {
+  Typography,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Paper,
+  InputBase
+} from "@material-ui/core";
+import { KeyboardBackspace, SearchOutlined } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import { showLoading, hideLoading } from "../../modules/loading";
 import { useDispatch } from "react-redux";
 
-const BackCusTop = ({ text }) => {
+const BackTop = ({ text }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
@@ -25,20 +32,31 @@ const BackCusTop = ({ text }) => {
           <IconButton style={{ color: "white" }} onClick={back}>
             <KeyboardBackspace />
           </IconButton>
-          <Typography component="div">{text}</Typography>
-          <div style={{ position: "absolute", right: 10 }}>
-            <IconButton style={{ color: "white", padding: 3 }}>
-              <Edit />
-            </IconButton>
-            <IconButton style={{ color: "white", padding: 3 }}>
-              <Delete />
-            </IconButton>
-          </div>
+          <Typography component="div">{text}목록</Typography>
         </Toolbar>
       </AppBar>
       <div style={{ marginTop: 60 }}></div>
+      <Paper square variant="outlined" style={{ marginBottom: 5 }}>
+        <InputBase
+          placeholder={`${text}찾기`}
+          style={{
+            fontSize: 13,
+            marginLeft: 10
+          }}
+        />
+        <IconButton
+          style={{
+            padding: 0,
+            float: "right",
+            marginTop: 4,
+            marginRight: 10
+          }}
+        >
+          <SearchOutlined fontSize="small" />
+        </IconButton>
+      </Paper>
     </>
   );
 };
 
-export default BackCusTop;
+export default BackTop;

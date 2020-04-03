@@ -1,6 +1,7 @@
 import React from "react";
 import CommentBig from "../components/common/CommentBig";
 import BackCusTop from "../components/comment/BackCusTop";
+import CommentInput from "../components/comment/CommentInput";
 const Comments = () => {
   return (
     <div>
@@ -28,6 +29,7 @@ const Comments = () => {
           <CommentBig user="유저" comment="댓글을 다는 공간입니다" />
         </div>
       </div>
+      <CommentInput />
     </div>
   );
 };

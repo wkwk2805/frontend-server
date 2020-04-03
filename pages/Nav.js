@@ -5,39 +5,36 @@ import Explore from "./Explore";
 import Notice from "./Notice";
 
 import Profile from "./Profile";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { hideLoading } from "../modules/loading";
-
+import { setWindowSize } from "../modules/size";
 const Nav = () => {
+  const size = useSelector(state => state.size);
   const dispatch = useDispatch();
-  const [win, setWin] = useState({});
   const [view, setView] = useState(<Post />);
   const setWindow = () => {
-    setWin({
-      wid: window.innerWidth,
-      hei: window.innerHeight
-    });
+    dispatch(setWindowSize(window.innerWidth, window.innerHeight));
   };
   const changeView = async viewName => {
     let resultView = "";
     switch (viewName) {
       case "Home":
-        resultView = <Post win={win} />;
+        resultView = <Post />;
         break;
       case "Search":
-        resultView = <Explore win={win} />;
+        resultView = <Explore />;
         break;
       case "Add":
         resultView = "어플리케이션만 가능합니다.";
         break;
       case "Notice":
-        resultView = <Notice win={win} />;
+        resultView = <Notice />;
         break;
       case "Profile":
-        resultView = <Profile win={win} />;
+        resultView = <Profile />;
         break;
       default:
-        resultView = <Post win={win} />;
+        resultView = <Post />;
         break;
     }
     await setView(resultView);
@@ -50,7 +47,7 @@ const Nav = () => {
   useEffect(() => {
     window.addEventListener("resize", setWindow);
     return () => window.removeEventListener("resize", setWindow);
-  }, [win]);
+  }, [size]);
   return (
     <div>
       {view}

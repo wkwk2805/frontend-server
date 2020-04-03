@@ -3,8 +3,10 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import { GridListTileBar } from "@material-ui/core";
 import { VideocamOutlined, CropOriginal } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
-const ExploreBody = ({ tileData, cellHeight }) => {
+const ExploreBody = ({ tileData }) => {
+  const windowSize = useSelector(state => state.size);
   return (
     <div
       style={{
@@ -14,7 +16,7 @@ const ExploreBody = ({ tileData, cellHeight }) => {
         overflow: "hidden"
       }}
     >
-      <GridList cellHeight={cellHeight} cols={3}>
+      <GridList cellHeight={windowSize.x / 3} cols={3}>
         {tileData.map((tile, index) => (
           <GridListTile
             key={index}
