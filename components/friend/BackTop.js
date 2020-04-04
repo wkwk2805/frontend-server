@@ -5,7 +5,7 @@ import {
   Toolbar,
   IconButton,
   Paper,
-  InputBase
+  InputBase,
 } from "@material-ui/core";
 import { KeyboardBackspace, SearchOutlined } from "@material-ui/icons";
 import { useRouter } from "next/router";
@@ -41,7 +41,8 @@ const BackTop = ({ text }) => {
           placeholder={`${text}찾기`}
           style={{
             fontSize: 13,
-            marginLeft: 10
+            marginLeft: 10,
+            width: "80%",
           }}
         />
         <IconButton
@@ -49,7 +50,7 @@ const BackTop = ({ text }) => {
             padding: 0,
             float: "right",
             marginTop: 4,
-            marginRight: 10
+            marginRight: 10,
           }}
         >
           <SearchOutlined fontSize="small" />

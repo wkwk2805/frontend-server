@@ -1,53 +1,59 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Group from "../components/group/Group";
 import GroupUesr from "../components/group/GroupUesr";
 import BackCusTop from "../components/comment/BackCusTop";
 import ExploreBody from "../components/explore/ExploreBody";
 import { Typography } from "@material-ui/core";
+import { hideLoading } from "../modules/loading";
+import { useDispatch } from "react-redux";
 
 const tileData = [
   {
     img: "/images/sample2.jpg",
     cols: 1,
-    type: "video"
+    type: "video",
   },
   {
     img: "/images/sample2.jpg",
     cols: 1,
-    type: "picture"
+    type: "picture",
   },
   {
     img: "/images/sample2.jpg",
     cols: 1,
-    type: "video"
+    type: "video",
   },
   {
     img: "/images/sample2.jpg",
     cols: 1,
-    type: "picture"
+    type: "picture",
   },
   {
     img: "/images/sample2.jpg",
     cols: 1,
-    type: "picture"
+    type: "picture",
   },
   {
     img: "/images/sample2.jpg",
     cols: 1,
-    type: "video"
+    type: "video",
   },
   {
     img: "/images/sample2.jpg",
     cols: 1,
-    type: "picture"
+    type: "picture",
   },
   {
     img: "/images/sample2.jpg",
     cols: 1,
-    type: "video"
-  }
+    type: "video",
+  },
 ];
 const GroupDetail = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(hideLoading());
+  }, []);
   return (
     <div>
       <BackCusTop text="그룹" />

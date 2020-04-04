@@ -4,22 +4,27 @@ import {
   Typography,
   Toolbar,
   IconButton,
-  Paper
+  Paper,
 } from "@material-ui/core";
 import { PersonAdd, Group, CropFree } from "@material-ui/icons";
 import CusGroup from "./CusGroup";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { showLoading } from "../../modules/loading";
 
 const CusTopNav = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [groupView, setGroupView] = useState(false);
   const groupToggle = () => {
     setGroupView(!groupView);
   };
   const moveFriendList = () => {
+    dispatch(showLoading());
     router.push("/FriendList");
   };
   const moveGroupList = () => {
+    dispatch(showLoading());
     router.push("/GroupList");
   };
   return (
@@ -30,7 +35,7 @@ const CusTopNav = () => {
           style={{
             width: "100%",
             minHeight: 20,
-            backgroundColor: "#0f4c81"
+            backgroundColor: "#0f4c81",
           }}
         >
           <Typography style={{ width: "50%" }}>Logo Space</Typography>
@@ -49,13 +54,18 @@ const CusTopNav = () => {
               style={{
                 padding: 5,
                 margin: -5,
+                marginRight: -2,
                 position: "absolute",
                 right: 0,
-                zIndex: 1
+                zIndex: 1,
               }}
             >
               <CropFree
-                style={{ fontSize: 20, fontWeight: 600, color: "black" }}
+                style={{
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "black",
+                }}
                 onClick={moveGroupList}
               />
             </IconButton>

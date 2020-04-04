@@ -4,13 +4,13 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Loading = () => {
-  const open = useSelector(state => state.loading);
+  const open = useSelector((state) => state.loading);
   return (
     <div>
       <Backdrop
         style={{
           zIndex: 3,
-          color: "#fff"
+          color: "#fff",
         }}
         open={open}
       >

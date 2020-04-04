@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Button } from "@material-ui/core";
-import CusTextField from "../components/CusTextField";
-import CusAnchor from "../components/CusAnchor";
+import CusTextField from "../components/auth/CusTextField";
+import CusAnchor from "../components/common/CusAnchor";
 
 const Signup = () => {
   return (

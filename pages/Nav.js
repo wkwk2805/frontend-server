@@ -8,14 +8,15 @@ import Profile from "./Profile";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading } from "../modules/loading";
 import { setWindowSize } from "../modules/size";
+
 const Nav = () => {
-  const size = useSelector(state => state.size);
+  const size = useSelector((state) => state.size);
   const dispatch = useDispatch();
   const [view, setView] = useState(<Post />);
   const setWindow = () => {
     dispatch(setWindowSize(window.innerWidth, window.innerHeight));
   };
-  const changeView = async viewName => {
+  const changeView = async (viewName) => {
     let resultView = "";
     switch (viewName) {
       case "Home":
