@@ -2,7 +2,7 @@ import React from "react";
 import {
   BottomNavigation,
   BottomNavigationAction,
-  Paper
+  Paper,
 } from "@material-ui/core";
 import { Home, Search, Feedback, PostAdd, Person } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ const CusBottomNav = ({ changeView }) => {
   const dispatch = useDispatch();
   const stylesIcon = { minWidth: 0, paddingBottom: 0, paddingTop: 0 };
   const [value, setValue] = React.useState(0);
-  const selectView = branch => {
+  const selectView = (branch) => {
     dispatch(showLoading());
     changeView(branch);
   };
@@ -24,7 +24,7 @@ const CusBottomNav = ({ changeView }) => {
           bottom: 0,
           left: 0,
           position: "fixed",
-          width: "100%"
+          width: "100%",
         }}
         elevation={8}
       >
@@ -34,7 +34,7 @@ const CusBottomNav = ({ changeView }) => {
             setValue(newValue);
           }}
           style={{
-            height: 40
+            height: 40,
           }}
         >
           <BottomNavigationAction

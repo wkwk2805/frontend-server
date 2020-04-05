@@ -26,6 +26,7 @@ const Nav = () => {
         resultView = <Explore />;
         break;
       case "Add":
+        window.ReactNativeWebView.postMessage("true");
         resultView = "어플리케이션만 가능합니다.";
         break;
       case "Notice":
