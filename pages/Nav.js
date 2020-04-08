@@ -8,8 +8,10 @@ import Profile from "./Profile";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading } from "../modules/loading";
 import { setWindowSize } from "../modules/size";
+import { useRouter } from "next/router";
 
 const Nav = () => {
+  const router = useRouter();
   const size = useSelector((state) => state.size);
   const dispatch = useDispatch();
   const [view, setView] = useState(<Post />);
@@ -27,7 +29,7 @@ const Nav = () => {
         break;
       case "Add":
         window.ReactNativeWebView.postMessage("true");
-        resultView = "어플리케이션만 가능합니다.";
+        resultView = <Post />;
         break;
       case "Notice":
         resultView = <Notice />;

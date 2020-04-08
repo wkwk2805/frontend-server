@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BottomNavigation,
   BottomNavigationAction,
@@ -9,6 +9,17 @@ import { useDispatch } from "react-redux";
 import { showLoading } from "../../modules/loading";
 
 const CusBottomNav = ({ changeView }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    var filter = "win16|win32|win64|mac|macintel";
+    if (navigator.platform) {
+      if (filter.indexOf(navigator.platform.toLowerCase()) > -1) {
+        setIsMobile(false);
+      } else {
+        setIsMobile(true);
+      }
+    }
+  }, []);
   const dispatch = useDispatch();
   const stylesIcon = { minWidth: 0, paddingBottom: 0, paddingTop: 0 };
   const [value, setValue] = React.useState(0);
@@ -31,6 +42,7 @@ const CusBottomNav = ({ changeView }) => {
         <BottomNavigation
           value={value}
           onChange={(event, newValue) => {
+            newValue === 2 && (newValue = 0);
             setValue(newValue);
           }}
           style={{
@@ -47,11 +59,13 @@ const CusBottomNav = ({ changeView }) => {
             style={stylesIcon}
             onClick={() => selectView("Search")}
           />
-          <BottomNavigationAction
-            icon={<PostAdd style={{ fontSize: 30 }} />}
-            style={stylesIcon}
-            onClick={() => selectView("Add")}
-          />
+          {isMobile && (
+            <BottomNavigationAction
+              icon={<PostAdd style={{ fontSize: 30 }} />}
+              style={stylesIcon}
+              onClick={() => selectView("Add")}
+            />
+          )}
           <BottomNavigationAction
             icon={<Feedback style={{ fontSize: 30 }} />}
             style={stylesIcon}
