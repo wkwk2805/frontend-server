@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 
-const CusTextField = ({ label, type, isErr }) => {
+const CusTextField = ({ label, type, isErr, onChange, name }) => {
   return (
     <TextField
       label={label}
@@ -11,6 +11,8 @@ const CusTextField = ({ label, type, isErr }) => {
       type={type}
       error={isErr}
       helperText={isErr && `유효하지 않습니다!`}
+      onChange={onChange}
+      name={name}
     />
   );
 };

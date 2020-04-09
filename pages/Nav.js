@@ -28,7 +28,7 @@ const Nav = () => {
         resultView = <Explore />;
         break;
       case "Add":
-        window.ReactNativeWebView.postMessage("true");
+        window.ReactNativeWebView.postMessage(true);
         resultView = <Post />;
         break;
       case "Notice":
