@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import rootReducer from "../modules";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import Loading from "../components/common/Loading";
+import Axios from "axios";
 
 const store = createStore(rootReducer);
 
