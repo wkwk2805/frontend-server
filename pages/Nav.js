@@ -28,7 +28,8 @@ const Nav = () => {
         resultView = <Explore />;
         break;
       case "Add":
-        window.ReactNativeWebView.postMessage(true);
+        const token = localStorage.getItem("token");
+        window.ReactNativeWebView.postMessage(token);
         resultView = <Post />;
         break;
       case "Notice":
