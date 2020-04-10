@@ -5,12 +5,15 @@ import Axios from "axios";
 import { useDispatch } from "react-redux";
 import { axiosInit } from "../modules/instance";
 import { hostName } from "../common/Util";
+import Loading from "../components/common/Loading";
+import { hideLoading, showLoading } from "../modules/loading";
 
 const Index = () => {
   const dispatch = useDispatch();
-  const [autoLogin, setAutoLogin] = useState(false);
+  const [view, setView] = useState("");
   // headers-token 설정
   useEffect(() => {
+    dispatch(showLoading());
     const token = localStorage.getItem("token");
     const axios = Axios.create({
       baseURL: hostName(),
@@ -18,23 +21,31 @@ const Index = () => {
     });
     dispatch(axiosInit(axios));
     (async () => {
-      await autoLoginSetting(axios, token);
+      await viewSetting(axios, token);
     })();
   }, []);
   // 자동로그인 설정
-  const autoLoginSetting = async (axios, token) => {
+  const viewSetting = async (axios, token) => {
     if (token) {
       const { data } = await axios.post("/auth/verify", { init: true });
       if (data.success) {
-        setAutoLogin(true);
+        setView("NAV");
       } else {
         alert(data.message);
-        setAutoLogin(false);
+        setView("LOGIN");
       }
+    } else {
+      setView("LOGIN");
     }
+    dispatch(hideLoading());
   };
-
-  return autoLogin ? <Nav /> : <Login />;
+  if (view === "LOGIN") {
+    return <Login />;
+  } else;
+  if (view === "NAV") {
+    return <Nav />;
+  } else {
+    return <Loading />;
+  }
 };
-
 export default Index;

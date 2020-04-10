@@ -10,7 +10,8 @@ const Loading = () => {
       <Backdrop
         style={{
           zIndex: 3,
-          color: "#fff",
+          color: "#3f51b5",
+          backgroundColor: "rgba(255,255,255,0.7)",
         }}
         open={open}
       >
