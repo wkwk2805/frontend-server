@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -8,25 +8,35 @@ import {
   IconButton,
   Typography,
   InputBase,
-  Button
+  Button,
 } from "@material-ui/core";
 import {
   FavoriteBorder,
   Share,
   ChatBubbleOutline,
   ArrowDropDown,
-  Add
+  Add,
 } from "@material-ui/icons";
 import { red } from "@material-ui/core/colors";
 import MenuIcon from "../components/post/MenuIcon";
 import CusComment from "../components/post/CusComment";
 import CusImages from "../components/post/CusImages";
 import { useRouter } from "next/router";
-
 import { useDispatch } from "react-redux";
 import { showLoading } from "../modules/loading";
 
-const Content = () => {
+const Content = (props) => {
+  const [content, setContent] = useState({ icon: true, string: "" });
+  useEffect(() => {
+    let con = props.content;
+    if (con) {
+      if (con.length > 30) {
+        setContent({ icon: true, string: con.substring(0, 30) + "..." });
+      } else {
+        setContent({ icon: false, string: con });
+      }
+    }
+  }, []);
   const dispatch = useDispatch();
   const router = useRouter();
   const moveComment = async () => {
@@ -41,7 +51,7 @@ const Content = () => {
             paddingBottom: 5,
             width: "39%",
             float: "left",
-            paddingRight: 0
+            paddingRight: 0,
           }}
           avatar={
             <Avatar
@@ -49,17 +59,17 @@ const Content = () => {
               style={{
                 backgroundColor: red[500],
                 width: 25,
-                height: 25
+                height: 25,
               }}
             >
               R
             </Avatar>
           }
-          title="아이디(이름)"
+          title={props.author.id}
           titleTypographyProps={{
             style: {
-              fontSize: 13
-            }
+              fontSize: 13,
+            },
           }}
         />
         <Button
@@ -69,10 +79,11 @@ const Content = () => {
             marginLeft: 3,
             padding: 0,
             fontSize: 11,
-            color: "rgb(15, 76, 129)"
+            color: "rgb(15, 76, 129)",
           }}
+          disabled={props.addFriend}
         >
-          친구추가
+          {!props.addFriend && "친구추가"}
         </Button>
         <div
           style={{
@@ -83,13 +94,13 @@ const Content = () => {
             float: "right",
             backgroundColor: "#d5d5d5",
             borderRadius: 15,
-            color: "white"
+            color: "white",
           }}
         >
           1/10
         </div>
       </div>
-      <CusImages />
+      <CusImages files={props.files} />
       <div>
         <CardActions
           disableSpacing
@@ -101,7 +112,7 @@ const Content = () => {
           >
             <FavoriteBorder />
             <Typography variant="caption" style={{ marginLeft: 4 }}>
-              30
+              {props.like ? props.like.length : 0}
             </Typography>
           </IconButton>
           <IconButton
@@ -110,7 +121,7 @@ const Content = () => {
           >
             <ChatBubbleOutline />
             <Typography variant="caption" style={{ marginLeft: 4 }}>
-              30
+              {props.comment ? props.comment.length : 0}
             </Typography>
           </IconButton>
           <IconButton
@@ -119,27 +130,41 @@ const Content = () => {
           >
             <Share />
             <Typography variant="caption" style={{ marginLeft: 4 }}>
-              30
+              {props.share ? props.share.length : 0}
             </Typography>
           </IconButton>
         </CardActions>
-        <MenuIcon />
+        {props.mine && <MenuIcon />}
       </div>
       <CardContent style={{ paddingTop: 0, paddingBottom: 10 }}>
         <Typography variant="caption" color="textSecondary" component="p">
-          이곳은 이 사진에 대한 글 등을 쓰는 공간입니다. 적당히 길이가 길어지면
-          ...
-          <ArrowDropDown style={{ verticalAlign: "middle" }} />
+          {content.string}
+          {content.icon && (
+            <IconButton
+              onClick={() => setContent({ icon: false, string: props.content })}
+              style={{ padding: 0 }}
+            >
+              <ArrowDropDown style={{ verticalAlign: "middle" }} />
+            </IconButton>
+          )}
         </Typography>
         <div style={{ marginTop: 10 }}>
-          <CusComment user="아이디(이름)" comment="댓글내용입니다..." />
+          {props.comments.length > 0 && (
+            <>
+              <CusComment user="아이디(이름)" comment="댓글내용입니다..." />
+              <Typography
+                variant="overline"
+                color="textSecondary"
+                component="p"
+              >
+                댓글10개
+                <IconButton style={{ padding: 0 }} onClick={moveComment}>
+                  <ArrowDropDown />
+                </IconButton>
+              </Typography>
+            </>
+          )}
         </div>
-        <Typography variant="overline" color="textSecondary" component="p">
-          댓글10개
-          <IconButton style={{ padding: 0 }} onClick={moveComment}>
-            <ArrowDropDown />
-          </IconButton>
-        </Typography>
 
         <div style={{ marginTop: 5 }}>
           <Avatar
@@ -149,7 +174,7 @@ const Content = () => {
               width: 20,
               height: 20,
               float: "left",
-              marginRight: 5
+              marginRight: 5,
             }}
           />
           <span style={{ verticalAlign: "super" }}>
@@ -159,7 +184,7 @@ const Content = () => {
                 fontSize: 12,
                 padding: 2,
                 verticalAlign: "bottom",
-                width: "80%"
+                width: "80%",
               }}
             />
             <IconButton
@@ -167,7 +192,7 @@ const Content = () => {
                 verticalAlign: "baseline",
                 padding: 0,
                 display: "inline-block",
-                float: "right"
+                float: "right",
               }}
             >
               <Add />
