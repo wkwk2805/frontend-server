@@ -15,16 +15,18 @@ const CusImages = ({ files }) => {
         backgroundColor: "black",
       }}
     >
-      {files.map((e) => (
-        <div>
-          <img
-            src={host() + "/" + e.path}
-            width="100%"
-            height="300"
-            style={{ backgroundColor: "black" }}
-          ></img>
-        </div>
-      ))}
+      {files &&
+        files.length > 0 &&
+        files.map((e) => (
+          <div>
+            <img
+              src={host() + "/" + e.path}
+              width="100%"
+              height="300"
+              style={{ backgroundColor: "black" }}
+            ></img>
+          </div>
+        ))}
       {/* <div>
         <CardMedia
           style={{

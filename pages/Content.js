@@ -65,7 +65,7 @@ const Content = (props) => {
               R
             </Avatar>
           }
-          title={props.author.id}
+          title={props.author && props.author.id}
           titleTypographyProps={{
             style: {
               fontSize: 13,
