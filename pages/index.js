@@ -8,7 +8,7 @@ import Loading from "../components/common/Loading";
 import { hideLoading, showLoading } from "../modules/loading";
 import { host } from "../../WebviewServer/host";
 
-const main = () => {
+const index = () => {
   const dispatch = useDispatch();
   const [view, setView] = useState("");
   // headers-token 설정
@@ -50,4 +50,4 @@ const main = () => {
     return <Loading />;
   }
 };
-export default main;
+export default index;
