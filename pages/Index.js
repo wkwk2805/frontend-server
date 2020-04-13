@@ -15,6 +15,7 @@ const Index = () => {
   useEffect(() => {
     dispatch(showLoading());
     const token = localStorage.getItem("token");
+    console.log(token);
     const axios = Axios.create({
       baseURL: host(),
       headers: { token: token },

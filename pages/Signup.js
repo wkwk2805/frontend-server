@@ -18,7 +18,7 @@ const Signup = () => {
     alert(data.message);
     if (data.success) {
       localStorage.setItem("token", data.returnValue);
-      router.push("/Login");
+      window.location.href = "/";
     }
   };
   const _onChange = (e) => {

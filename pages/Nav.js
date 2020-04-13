@@ -56,6 +56,17 @@ const Nav = () => {
     window.addEventListener("resize", setWindow);
     return () => window.removeEventListener("resize", setWindow);
   }, [size]);
+  useEffect(() => {
+    window.addEventListener("scroll", refreshHandler);
+    return () => window.removeEventListener("scroll", refreshHandler);
+  }, []);
+  const refreshHandler = (e) => {
+    const { scrollTop } = e.target.documentElement;
+    window.ReactNativeWebView &&
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ branch: "Refresh", refresh: scrollTop === 0 })
+      );
+  };
   return (
     <div>
       {view}
