@@ -13,7 +13,8 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-slick": "^0.25.2",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "rmc-pull-to-refresh": "^1.0.12"
   },
   "scripts": {
     "dev": "next",

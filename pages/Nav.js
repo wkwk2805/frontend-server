@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideLoading } from "../modules/loading";
 import { setWindowSize } from "../modules/size";
 import { useRouter } from "next/router";
+import { pullToRefresh } from "../common/Util";
 
 const Nav = () => {
   const router = useRouter();
@@ -29,7 +30,9 @@ const Nav = () => {
         break;
       case "Add":
         const token = localStorage.getItem("token");
-        window.ReactNativeWebView.postMessage(token);
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ branch: "Add", token })
+        );
         resultView = <Post />;
         break;
       case "Notice":

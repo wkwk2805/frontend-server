@@ -149,21 +149,23 @@ const Content = (props) => {
           )}
         </Typography>
         <div style={{ marginTop: 10 }}>
-          {props.comments.length > 0 && (
-            <>
-              <CusComment user="아이디(이름)" comment="댓글내용입니다..." />
-              <Typography
-                variant="overline"
-                color="textSecondary"
-                component="p"
-              >
-                댓글10개
-                <IconButton style={{ padding: 0 }} onClick={moveComment}>
-                  <ArrowDropDown />
-                </IconButton>
-              </Typography>
-            </>
-          )}
+          {
+            /* props.comments.length > 0 */ true && (
+              <>
+                <CusComment user="아이디(이름)" comment="댓글내용입니다..." />
+                <Typography
+                  variant="overline"
+                  color="textSecondary"
+                  component="p"
+                >
+                  댓글10개
+                  <IconButton style={{ padding: 0 }} onClick={moveComment}>
+                    <ArrowDropDown />
+                  </IconButton>
+                </Typography>
+              </>
+            )
+          }
         </div>
 
         <div style={{ marginTop: 5 }}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { CardMedia } from "@material-ui/core";
 import Slider from "react-slick";
-import { hostName } from "../../common/Util";
+import { host } from "../../../WebviewServer/host";
 const CusImages = ({ files }) => {
   const settings = {
     infinite: false,
@@ -10,24 +10,17 @@ const CusImages = ({ files }) => {
     <Slider
       {...settings}
       style={{
+        marginTop: 10,
         paddingTop: "3%", // 16:9,
         backgroundColor: "black",
       }}
     >
       {files.map((e) => (
         <div>
-          {/* <CardMedia
-            image={hostName() + "/" + e.path}
-            title="Sample"
-            style={{
-              height: 0,
-              paddingTop: "70%", // 16:9,
-            }}
-            component="img"
-          /> */}
           <img
-            src={hostName() + "/" + e.path}
+            src={host() + "/" + e.path}
             width="100%"
+            height="300"
             style={{ backgroundColor: "black" }}
           ></img>
         </div>

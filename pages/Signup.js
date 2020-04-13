@@ -3,8 +3,8 @@ import { Container, Button } from "@material-ui/core";
 import CusTextField from "../components/auth/CusTextField";
 import CusAnchor from "../components/common/CusAnchor";
 import axios from "axios";
-import { hostName } from "../common/Util";
 import { useRouter } from "next/router";
+import { host } from "../../WebviewServer/host";
 
 const Signup = () => {
   const router = useRouter();
@@ -14,11 +14,11 @@ const Signup = () => {
     if (!isValidation()) {
       return;
     }
-    const { data } = await axios.put(`${hostName()}/auth`, userInfo);
+    const { data } = await axios.put(`${host()}/auth`, userInfo);
     alert(data.message);
     if (data.success) {
       localStorage.setItem("token", data.returnValue);
-      // router.push("/Login");
+      router.push("/Login");
     }
   };
   const _onChange = (e) => {

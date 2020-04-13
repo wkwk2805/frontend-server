@@ -7,12 +7,12 @@ const Post = () => {
   const instance = useSelector((s) => s.instance);
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    (async () => {
-      const { data } = await instance.post("/post");
-      console.log(data);
-      setPosts(data);
-    })();
+    (async () => await getPosts())();
   }, []);
+  const getPosts = async () => {
+    const { data } = await instance.post("/post");
+    setPosts(data);
+  };
   return (
     <>
       <CusTopNav />

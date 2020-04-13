@@ -6,7 +6,7 @@ import CusAnchor from "../components/common/CusAnchor";
 import { showLoading } from "../modules/loading";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { hostName } from "../common/Util";
+import { host } from "../../WebviewServer/host";
 
 const Login = () => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const Login = () => {
       return;
     }
     dispatch(showLoading());
-    const { data } = await axios.post(`${hostName()}/auth/login`, userInfo);
+    const { data } = await axios.post(`${host()}/auth/login`, userInfo);
     alert(data.message);
     if (data.success) {
       localStorage.setItem("token", data.returnValue);
