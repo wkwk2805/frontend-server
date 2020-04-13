@@ -14,7 +14,7 @@ const Signup = () => {
     if (!isValidation()) {
       return;
     }
-    const { data } = await axios.put(`${host()}/auth`, userInfo);
+    const { data } = await axios.put(`${host()}:3001/auth`, userInfo);
     alert(data.message);
     if (data.success) {
       localStorage.setItem("token", data.returnValue);

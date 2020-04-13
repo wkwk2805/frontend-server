@@ -17,7 +17,7 @@ const Index = () => {
     const token = localStorage.getItem("token");
     console.log(token);
     const axios = Axios.create({
-      baseURL: host(),
+      baseURL: host() + ":3001",
       headers: { token: token },
     });
     dispatch(axiosInit(axios));

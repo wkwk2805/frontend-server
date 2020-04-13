@@ -20,7 +20,7 @@ const CusImages = ({ files }) => {
         files.map((e) => (
           <div>
             <img
-              src={host() + "/" + e.path}
+              src={host() + ":3001/" + e.path}
               width="100%"
               height="300"
               style={{ backgroundColor: "black" }}

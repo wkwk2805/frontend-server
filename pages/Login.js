@@ -19,7 +19,7 @@ const Login = () => {
       return;
     }
     dispatch(showLoading());
-    const { data } = await axios.post(`${host()}/auth/login`, userInfo);
+    const { data } = await axios.post(`${host()}:3001/auth/login`, userInfo);
     alert(data.message);
     if (data.success) {
       localStorage.setItem("token", data.returnValue);
