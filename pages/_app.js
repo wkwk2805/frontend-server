@@ -11,7 +11,14 @@ const store = createStore(rootReducer);
 const AppWithRedux = ({ Component, pageProps }) => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    setIsMobile(window.isMobile);
+    var filter = "win16|win32|win64|mac|macintel";
+    if (navigator.platform) {
+      if (filter.indexOf(navigator.platform.toLowerCase()) > -1) {
+        setIsMobile(false);
+      } else {
+        setIsMobile(true);
+      }
+    }
   }, []);
   return (
     <>
