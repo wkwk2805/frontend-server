@@ -7,6 +7,7 @@ import { axiosInit } from "../modules/instance";
 import Loading from "../components/common/Loading";
 import { hideLoading, showLoading } from "../modules/loading";
 import { host } from "../../WebviewServer/host";
+import { setUser } from "../modules/user";
 
 const index = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,6 @@ const index = () => {
   useEffect(() => {
     dispatch(showLoading());
     const token = localStorage.getItem("token");
-    console.log(token);
     const axios = Axios.create({
       baseURL: host() + ":3001",
       headers: { token: token },
@@ -30,6 +30,7 @@ const index = () => {
     if (token) {
       const { data } = await axios.post("/auth/verify", { init: true });
       if (data.success) {
+        dispatch(setUser(data.returnValue[0]));
         setView("NAV");
       } else {
         alert(data.message);

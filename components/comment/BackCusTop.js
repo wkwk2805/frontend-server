@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { showLoading, hideLoading } from "../../modules/loading";
 import { useDispatch } from "react-redux";
 
-const BackCusTop = ({ text }) => {
+const BackCusTop = ({ text, edit }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
@@ -26,14 +26,16 @@ const BackCusTop = ({ text }) => {
             <KeyboardBackspace />
           </IconButton>
           <Typography component="div">{text}</Typography>
-          <div style={{ position: "absolute", right: 10 }}>
-            <IconButton style={{ color: "white", padding: 3 }}>
-              <Edit />
-            </IconButton>
-            <IconButton style={{ color: "white", padding: 3 }}>
-              <Delete />
-            </IconButton>
-          </div>
+          {edit && (
+            <div style={{ position: "absolute", right: 10 }}>
+              <IconButton style={{ color: "white", padding: 3 }}>
+                <Edit />
+              </IconButton>
+              <IconButton style={{ color: "white", padding: 3 }}>
+                <Delete />
+              </IconButton>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <div style={{ marginTop: 60 }}></div>

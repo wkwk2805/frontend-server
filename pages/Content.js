@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Card,
   CardHeader,
@@ -16,16 +16,20 @@ import {
   ChatBubbleOutline,
   ArrowDropDown,
   Add,
+  Favorite,
 } from "@material-ui/icons";
 import { red } from "@material-ui/core/colors";
 import MenuIcon from "../components/post/MenuIcon";
 import CusComment from "../components/post/CusComment";
 import CusImages from "../components/post/CusImages";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showLoading } from "../modules/loading";
 
 const Content = (props) => {
+  const userInfo = useSelector((s) => s.user);
+  const [comment, setComment] = useState("");
+  const instance = useSelector((s) => s.instance);
   const [content, setContent] = useState({ icon: true, string: "" });
   useEffect(() => {
     let con = props.content;
@@ -41,7 +45,31 @@ const Content = (props) => {
   const router = useRouter();
   const moveComment = async () => {
     dispatch(showLoading());
-    router.push("/Comments");
+    router.push(
+      {
+        pathname: "/Comments",
+        query: { post_id: props.post_id },
+      },
+      "/Comments"
+    );
+  };
+  const addComment = async () => {
+    const { data } = await instance.put("/comment", {
+      content: comment,
+      post_id: props.post_id,
+    });
+    if (data.success) {
+      props.getPosts();
+      setComment("");
+    }
+  };
+  const likePost = async () => {
+    const { data } = await instance.put("/post/like", {
+      post_id: props.post_id,
+    });
+    if (data.success) {
+      props.getPosts();
+    }
   };
   return (
     <Card style={{ marginTop: 5 }}>
@@ -109,19 +137,27 @@ const Content = (props) => {
           <IconButton
             aria-label="like"
             style={{ paddingRight: 0, paddingLeft: 15 }}
+            onClick={likePost}
           >
-            <FavoriteBorder />
+            {props.likes &&
+            props.likes.filter((e) => e.user._id === userInfo._id).length >
+              0 ? (
+              <Favorite />
+            ) : (
+              <FavoriteBorder />
+            )}
             <Typography variant="caption" style={{ marginLeft: 4 }}>
-              {props.like ? props.like.length : 0}
+              {props.likes ? props.likes.length : 0}
             </Typography>
           </IconButton>
           <IconButton
             aria-label="comment"
             style={{ paddingRight: 0, paddingLeft: 15 }}
+            onClick={moveComment}
           >
             <ChatBubbleOutline />
             <Typography variant="caption" style={{ marginLeft: 4 }}>
-              {props.comment ? props.comment.length : 0}
+              {props.comments ? props.comments.length : 0}
             </Typography>
           </IconButton>
           <IconButton
@@ -130,7 +166,7 @@ const Content = (props) => {
           >
             <Share />
             <Typography variant="caption" style={{ marginLeft: 4 }}>
-              {props.share ? props.share.length : 0}
+              {props.shares ? props.shares.length : 0}
             </Typography>
           </IconButton>
         </CardActions>
@@ -149,23 +185,29 @@ const Content = (props) => {
           )}
         </Typography>
         <div style={{ marginTop: 10 }}>
-          {
-            /* props.comments.length > 0 */ true && (
-              <>
-                <CusComment user="아이디(이름)" comment="댓글내용입니다..." />
+          {props.comments && props.comments.length > 0 && (
+            <>
+              <CusComment
+                likes={props.comments[0].likes}
+                id={props.comments[0]._id}
+                user={props.comments[0].author.id}
+                comment={props.comments[0].content}
+                getPosts={props.getPosts}
+              />
+              {props.comments.length > 1 && (
                 <Typography
                   variant="overline"
                   color="textSecondary"
                   component="p"
                 >
-                  댓글10개
+                  댓글{props.comments.length}개
                   <IconButton style={{ padding: 0 }} onClick={moveComment}>
                     <ArrowDropDown />
                   </IconButton>
                 </Typography>
-              </>
-            )
-          }
+              )}
+            </>
+          )}
         </div>
 
         <div style={{ marginTop: 5 }}>
@@ -188,6 +230,8 @@ const Content = (props) => {
                 verticalAlign: "bottom",
                 width: "80%",
               }}
+              onChange={(e) => setComment(e.target.value)}
+              value={comment}
             />
             <IconButton
               style={{
@@ -196,6 +240,7 @@ const Content = (props) => {
                 display: "inline-block",
                 float: "right",
               }}
+              onClick={addComment}
             >
               <Add />
             </IconButton>

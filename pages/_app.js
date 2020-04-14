@@ -4,10 +4,15 @@ import rootReducer from "../modules";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import Loading from "../components/common/Loading";
+import { Container } from "@material-ui/core";
 
 const store = createStore(rootReducer);
 
 const AppWithRedux = ({ Component, pageProps }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.isMobile);
+  }, []);
   return (
     <>
       <Head>
@@ -26,7 +31,13 @@ const AppWithRedux = ({ Component, pageProps }) => {
       </Head>
       <Provider store={store}>
         <Loading />
-        <Component {...pageProps} />
+        {isMobile ? (
+          <Component {...pageProps} />
+        ) : (
+          <Container maxWidth="sm">
+            <Component {...pageProps} />
+          </Container>
+        )}
       </Provider>
     </>
   );

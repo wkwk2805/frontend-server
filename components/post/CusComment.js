@@ -1,9 +1,18 @@
 import React from "react";
 import { Avatar, Typography, IconButton } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
-import { FavoriteBorder } from "@material-ui/icons";
+import { FavoriteBorder, Favorite } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
-const CusComment = ({ user, comment, image }) => {
+const CusComment = ({ id, user, comment, image, getPosts, likes }) => {
+  const instance = useSelector((s) => s.instance);
+  const userInfo = useSelector((s) => s.user);
+  const likeComment = async () => {
+    const { data } = await instance.put("/comment/like", { comment_id: id });
+    if (data.success) {
+      await getPosts();
+    }
+  };
   return (
     <>
       <Avatar
@@ -13,7 +22,7 @@ const CusComment = ({ user, comment, image }) => {
           width: 20,
           height: 20,
           float: "left",
-          marginRight: 5
+          marginRight: 5,
         }}
         src={image}
       />
@@ -29,11 +38,18 @@ const CusComment = ({ user, comment, image }) => {
       <div
         style={{
           display: "inline-block",
-          float: "right"
+          float: "right",
         }}
       >
-        <IconButton style={{ verticalAlign: "middle", padding: 5 }}>
-          <FavoriteBorder fontSize="small" />
+        <IconButton
+          style={{ verticalAlign: "middle", padding: 5 }}
+          onClick={likeComment}
+        >
+          {likes.filter((e) => e.user === userInfo._id).length > 0 ? (
+            <Favorite fontSize="small" />
+          ) : (
+            <FavoriteBorder fontSize="small" />
+          )}
         </IconButton>
       </div>
     </>

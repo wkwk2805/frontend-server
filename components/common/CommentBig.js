@@ -1,11 +1,34 @@
 import React from "react";
 import { Avatar, Typography, IconButton, Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
-import { FavoriteBorder } from "@material-ui/icons";
+import { FavoriteBorder, Favorite } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
-const CommentBig = ({ user, comment, image }) => {
+const CommentBig = ({
+  id,
+  user,
+  comment,
+  image,
+  selectedComment,
+  setSelected,
+  likeComment,
+  likes,
+}) => {
+  const userInfo = useSelector((s) => s.user);
+  const likeCommentBig = (e) => {
+    e.stopPropagation();
+    likeComment(id);
+  };
   return (
-    <div style={{ margin: 5 }}>
+    <div
+      style={{
+        padding: 5,
+        backgroundColor: selectedComment === id && "#eeeeee",
+      }}
+      onClick={() =>
+        selectedComment !== id ? setSelected(id, user) : setSelected("")
+      }
+    >
       <Avatar
         aria-label="user"
         style={{
@@ -13,7 +36,7 @@ const CommentBig = ({ user, comment, image }) => {
           width: 35,
           height: 35,
           float: "left",
-          marginRight: 5
+          marginRight: 5,
         }}
         src={image}
       />
@@ -29,11 +52,18 @@ const CommentBig = ({ user, comment, image }) => {
       <div
         style={{
           display: "inline-block",
-          float: "right"
+          float: "right",
         }}
       >
-        <IconButton style={{ verticalAlign: "middle", padding: 5 }}>
-          <FavoriteBorder fontSize="small" />
+        <IconButton
+          style={{ verticalAlign: "middle", padding: 5 }}
+          onClick={likeCommentBig}
+        >
+          {likes.filter((e) => e.user === userInfo._id).length > 0 ? (
+            <Favorite fontSize="small" />
+          ) : (
+            <FavoriteBorder fontSize="small" />
+          )}
         </IconButton>
       </div>
       <Button
@@ -42,8 +72,9 @@ const CommentBig = ({ user, comment, image }) => {
           fontSize: 11,
           padding: 0,
           textAlign: "left",
-          minWidth: 0
+          minWidth: 0,
         }}
+        onClick={() => setSelected(id, user)}
       >
         답글달기
       </Button>

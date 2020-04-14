@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Container, Button } from "@material-ui/core";
 import CusTextField from "../components/auth/CusTextField";
 import CusAnchor from "../components/common/CusAnchor";
-import { showLoading } from "../modules/loading";
+import { showLoading, hideLoading } from "../modules/loading";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { host } from "../../WebviewServer/host";
@@ -23,8 +23,10 @@ const Login = () => {
     alert(data.message);
     if (data.success) {
       localStorage.setItem("token", data.returnValue);
+      router.reload();
+    } else {
+      dispatch(hideLoading());
     }
-    router.reload();
   };
   const _onChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });

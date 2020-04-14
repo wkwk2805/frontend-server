@@ -8,11 +8,8 @@ import Profile from "./Profile";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading } from "../modules/loading";
 import { setWindowSize } from "../modules/size";
-import { useRouter } from "next/router";
-import { pullToRefresh } from "../common/Util";
 
 const Nav = () => {
-  const router = useRouter();
   const size = useSelector((state) => state.size);
   const dispatch = useDispatch();
   const [view, setView] = useState(<Post />);

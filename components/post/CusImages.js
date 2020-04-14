@@ -17,8 +17,8 @@ const CusImages = ({ files }) => {
     >
       {files &&
         files.length > 0 &&
-        files.map((e) => (
-          <div>
+        files.map((e, i) => (
+          <div key={i}>
             <img
               src={host() + ":3001/" + e.path}
               width="100%"

@@ -19,15 +19,17 @@ const Post = () => {
       <div>
         {posts.map((e, i) => (
           <Content
-            content={e.content}
             key={i}
+            addFriend
+            content={e.content}
             files={e.files}
             author={e.author}
             likes={e.likes}
             shares={e.shares}
             comments={e.comments}
-            addFriend
             mine={e.mine}
+            post_id={e._id}
+            getPosts={getPosts}
           />
         ))}
       </div>
