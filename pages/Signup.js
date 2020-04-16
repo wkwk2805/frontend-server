@@ -5,8 +5,15 @@ import CusAnchor from "../components/common/CusAnchor";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { host } from "../../WebviewServer/host";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { hideLoading } from "../modules/loading";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(hideLoading());
+  }, []);
   const router = useRouter();
   const [userInfo, setUserInfo] = useState({});
   const [error, setError] = useState({});
@@ -18,7 +25,7 @@ const Signup = () => {
     alert(data.message);
     if (data.success) {
       localStorage.setItem("token", data.returnValue);
-      window.location.href = "/";
+      router.push("/");
     }
   };
   const _onChange = (e) => {

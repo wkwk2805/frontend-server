@@ -1,11 +1,19 @@
 import React from "react";
-import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { showLoading } from "../../modules/loading";
 
 const CusAnchor = ({ text, href }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const _onClick = () => {
+    dispatch(showLoading());
+    router.push(href);
+  };
   return (
-    <Link href={href}>
-      <a style={{ cursor: "pointer" }}>{text}</a>
-    </Link>
+    <a style={{ cursor: "pointer" }} onClick={_onClick}>
+      {text}
+    </a>
   );
 };
 

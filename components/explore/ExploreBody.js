@@ -4,19 +4,25 @@ import GridListTile from "@material-ui/core/GridListTile";
 import { GridListTileBar } from "@material-ui/core";
 import { VideocamOutlined, CropOriginal } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const ExploreBody = ({ tileData }) => {
-  const windowSize = useSelector(state => state.size);
+  const windowSize = useSelector((state) => state.size);
   return (
     <div
       style={{
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "space",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
-      <GridList cellHeight={windowSize.x / 3} cols={3}>
+      <GridList
+        cellHeight={windowSize.x / 3}
+        cols={
+          tileData.length > 3 || tileData.length % 3 === 0 ? 3 : tileData.length
+        }
+      >
         {tileData.map((tile, index) => (
           <GridListTile
             key={index}
@@ -37,7 +43,7 @@ const ExploreBody = ({ tileData }) => {
                 background:
                   "linear-gradient(to bottom, rgba(0,0,0,0) 0%, " +
                   "rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%)",
-                height: 30
+                height: 30,
               }}
               actionPosition="right"
             />
